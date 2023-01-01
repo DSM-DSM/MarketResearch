@@ -12,7 +12,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 载入文本
-df = pd.read_excel('../data/NLP处理后.xlsx')
+df = pd.read_excel('../data/深夜食堂/NLP处理后.xlsx')
 data = df[df['if_positive'] == 1]
 
 # 载入停用词表
@@ -41,15 +41,16 @@ word_df = word_df.drop([' '])
 result = word_df.sort_values(ascending=False)
 
 # 导出频率前300的关键词
-result[:300].to_excel('../data/word_frequency.xlsx', encoding='utf-8')
+result[:300].to_excel('../data/深夜食堂/word_frequency.xlsx', encoding='utf-8')
 
 # 制作词云图
-image_background = PIL.Image.open('../pic/background.jpg')
+image_background = PIL.Image.open('../pic/background6.png')
 
 MASK = np.array(image_background)
-wc = WordCloud(font_path='msyh.ttc', colormap='nipy_spectral',
-               background_color='white', relative_scaling=0.1, height=600, width=800, margin=10,
-               max_words=1000, collocations=False, mask=MASK).fit_words(result[0:300])
+wc = WordCloud(font_path='msyh.ttc', colormap='nipy_spectral', scale=2,
+               background_color='white', relative_scaling=0.1, height=600, width=800, margin=1,
+               max_words=1000, min_font_size=5, max_font_size=60, font_step=3,
+               collocations=False, mask=MASK).fit_words(result[0:300])
 plt.imshow(wc)
 plt.show()
-wc.to_file('../pic/wordcloud.png')
+wc.to_file('../pic/深夜食堂/wordcloud.png')

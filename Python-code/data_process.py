@@ -36,7 +36,7 @@ def _to_chinese4(num):
 
 def filter(df):
     df.dropna(inplace=True)
-    df.drop_duplicates(subset=['标题', 'season'], keep='first', inplace=True)
+    df.drop_duplicates(subset=['标题', 'short'], keep='first', inplace=True)
     drop_list = []
     df.reset_index(inplace=True)
     for i in range(df.shape[0]):
@@ -48,14 +48,22 @@ def filter(df):
     return df
 
 
-df = pd.DataFrame()
-for i in range(10):
-    num = _to_chinese4(i + 1)
-    path = f'../data/孤独的美食家第{num}季短评.xlsx'
-    df_1 = pd.read_excel(path)
-    df_1['season'] = i
-    df_1 = filter(df_1)
-    df = pd.concat([df, df_1])
-print(df.shape)
-df.reset_index(inplace=True)
-df.to_excel('../data/孤独的美食家十季度短评处理后.xlsx')
+# df = pd.DataFrame()
+# for i in range(10):
+#     num = _to_chinese4(i + 1)
+#     path = f'../data/孤独的美食家第{num}季短评.xlsx'
+#     df_1 = pd.read_excel(path)
+#     df_1['season'] = i
+#     df_1 = filter(df_1)
+#     df = pd.concat([df, df_1])
+# print(df.shape)
+# df.reset_index(inplace=True)
+# df.to_excel('../data/孤独的美食家十季度短评处理后.xlsx')
+
+df_1 = pd.read_excel('../data/深夜食堂/深夜食堂日版时序.xlsx')
+df_2 = pd.read_excel('../data/深夜食堂/深夜食堂日版热评.xlsx')
+df_1 = filter(df_1)
+df_2 = filter(df_2)
+df_1 = pd.concat([df_1, df_2])
+df_1.reset_index(inplace=True)
+df_1.to_excel('../data/深夜食堂/合并版.xlsx')
