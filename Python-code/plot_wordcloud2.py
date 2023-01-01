@@ -47,9 +47,9 @@ result[:300].to_excel('../data/word_frequency.xlsx', encoding='utf-8')
 image_background = PIL.Image.open('../pic/background.jpg')
 
 MASK = np.array(image_background)
-wc = WordCloud(font_path='msyh.ttc', colormap='magma', scale=32,
-               background_color='white', width=400, height=200, margin=10,
-               max_words=300, collocations=False, mask=MASK).fit_words(result[0:300])  # mysh.ttc微软雅黑
+wc = WordCloud(font_path='msyh.ttc', colormap='nipy_spectral',
+               background_color='white', relative_scaling=0.1, height=600, width=800, margin=10,
+               max_words=1000, collocations=False, mask=MASK).fit_words(result[0:300])
 plt.imshow(wc)
 plt.show()
 wc.to_file('../pic/wordcloud.png')
