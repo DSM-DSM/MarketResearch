@@ -44,13 +44,12 @@ result = word_df.sort_values(ascending=False)
 result[:300].to_excel('../data/深夜食堂/word_frequency.xlsx', encoding='utf-8')
 
 # 制作词云图
-image_background = PIL.Image.open('../pic/background6.png')
+image_background = PIL.Image.open('../pic/背景/background8.jpg')
 
 MASK = np.array(image_background)
-wc = WordCloud(font_path='msyh.ttc', colormap='nipy_spectral', scale=2,
-               background_color='white', relative_scaling=0.1, height=600, width=800, margin=1,
-               max_words=1000, min_font_size=5, max_font_size=60, font_step=3,
-               collocations=False, mask=MASK).fit_words(result[0:300])
+wc = WordCloud(font_path='msyh.ttc', colormap='PuOr', mode='RGBA', scale=2,
+               background_color='white', relative_scaling=0.5, height=600, width=800, margin=1,
+               max_words=200, min_font_size=20, max_font_size=400, font_step=2, mask=MASK).fit_words(result[0:300])
 plt.imshow(wc)
 plt.show()
-wc.to_file('../pic/深夜食堂/wordcloud.png')
+wc.to_file('../pic/原图/蛋糕1/wordcloud15.png')

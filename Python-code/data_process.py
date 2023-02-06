@@ -60,10 +60,10 @@ def filter(df):
 # df.reset_index(inplace=True)
 # df.to_excel('../data/孤独的美食家十季度短评处理后.xlsx')
 
-df_1 = pd.read_excel('../data/深夜食堂/深夜食堂日版时序.xlsx')
-df_2 = pd.read_excel('../data/深夜食堂/深夜食堂日版热评.xlsx')
+df_1 = pd.read_excel('../data/背景/深夜食堂日版时序.xlsx')
+df_2 = pd.read_excel('../data/背景/深夜食堂日版热评.xlsx')
 df_1 = filter(df_1)
 df_2 = filter(df_2)
 df_1 = pd.concat([df_1, df_2])
 df_1.reset_index(inplace=True)
-df_1.to_excel('../data/深夜食堂/合并版.xlsx')
+df_1.to_excel('../data/背景/合并版.xlsx')
