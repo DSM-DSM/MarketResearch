@@ -7,7 +7,7 @@ import pandas as pd
 from snownlp import SnowNLP
 import re
 
-df = pd.read_excel('../data/背景/合并版.xlsx')
+df = pd.read_excel('../../data/背景/合并版.xlsx')
 
 comments = df['short'].tolist()
 
@@ -33,4 +33,4 @@ print('在正面情绪概率阈值为%s的条件下，正面情绪出现的频�
 
 df['if_positive'] = 0
 df.loc[df['sentiment_score'] > threshold, 'if_positive'] = 1
-df.to_excel('../data/背景/NLP处理后.xlsx')
+df.to_excel('../../data/背景/NLP处理后.xlsx')
