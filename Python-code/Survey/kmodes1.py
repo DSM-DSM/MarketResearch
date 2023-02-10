@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 import kmeans_utils
+from decode import decoding_centroids
 
 # 防止plt汉字乱码
 mpl.rcParams['font.sans-serif'] = ['simhei']
@@ -30,7 +31,7 @@ def plot_jhistory(j_history):
 def main():
     # K-Means聚类
     print('\n即将运行K-Means聚类算法。\n\n')
-
+    question = ['Q26', 'Q27', 'Q28', 'Q29', 'Q30']
     # 随机生成样本集
     # np.random.seed(12783)
     data = pd.read_excel('../data_Q26-30.xlsx')
@@ -42,6 +43,7 @@ def main():
 
     # 随机选择初始质心
     initial_centroids = kmeans_utils.init_centroids(x, k)
+    print('初始质心:')
     print(initial_centroids[0])
     # 固定选择初始质心
     # initial_centroids = np.array([[5, -1], [0, 6]])
@@ -65,9 +67,11 @@ def main():
     # 绘制J历史轨迹
     plot_jhistory(j_values)
     print('\nK-Means运行完毕。\n\n')
-    print(centroids[-1])
     data[f'class'] = r
     data.to_excel('../kmodes_result.xlsx', index=True)
+    print('输出聚类中心具体含义:')
+    for i in range(centroids[-1].shape[0]):
+        decoding_centroids(question, centroids[-1][i, :])
 
 
 if __name__ == "__main__":

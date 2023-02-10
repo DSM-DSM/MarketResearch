@@ -42,7 +42,8 @@ def main():
     for k in range(1, max_k + 1):
         # 随机选择初始质心
         initial_centroids = kmeans_utils.init_centroids(x, k)
-
+        print('初始质心:')
+        print(initial_centroids)
         j_values = np.zeros(max_iters)
 
         # 运行K-Modes算法
