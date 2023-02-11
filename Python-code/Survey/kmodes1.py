@@ -9,7 +9,8 @@ from decode import Decode
 # 防止plt汉字乱码
 mpl.rcParams['font.sans-serif'] = ['simhei']
 mpl.rcParams['axes.unicode_minus'] = False
-
+plt.rcParams['savefig.dpi'] = 200
+plt.rcParams['figure.dpi'] = 200
 
 def plot_jhistory(j_history):
     """
@@ -24,7 +25,7 @@ def plot_jhistory(j_history):
     plt.xlabel(u'迭代次数')
     plt.ylabel(u'代价J')
     plt.title(u'J历史')
-
+    plt.savefig('../../pic/kmodes/j_history.png')
     plt.show()
 
 

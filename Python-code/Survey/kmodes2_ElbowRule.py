@@ -8,6 +8,8 @@ import kmeans_utils
 # 防止plt汉字乱码
 mpl.rcParams['font.sans-serif'] = ['simhei']
 mpl.rcParams['axes.unicode_minus'] = False
+plt.rcParams['savefig.dpi'] = 200
+plt.rcParams['figure.dpi'] = 200
 
 
 def plot_kj(kj):
@@ -20,7 +22,7 @@ def plot_kj(kj):
     plt.ylabel('J')
     plt.title(u'K-J关系轨迹')
     # plt.xlim([1, len(kj)])
-
+    plt.savefig('../../pic/kmodes/K-J.png')
     plt.show()
 
 

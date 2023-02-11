@@ -203,7 +203,7 @@ class Ridit():
             plt.axhline(self.crosstab['ci_l'][i + 1], x - line_length, x + line_length, c=c_list[i])
             plt.axhline(self.crosstab['ci_u'][i + 1], x - line_length, x + line_length, c=c_list[i])
         plt.grid()
-        plt.xticks(x_tick_loc, x_tick_name, rotation=15)
+        plt.xticks(x_tick_loc, x_tick_name, rotation=23)
         plt.xlim(0, 1)
         string1 = self.map_dict[self.question_list[0]]['question']
         string1 = re.sub(r'[^\u4e00-\u9fa5]', '', string1)
@@ -212,4 +212,5 @@ class Ridit():
         plt.xlabel(str(self.question_list[0]) + ':' + string1 + '\n' +
                    str(self.question_list[1]) + ':' + string2)
         plt.ylabel('平均Ridit值')
+        plt.savefig(f'../../pic/ridit_boxplot/{self.question_list[0]}-{self.question_list[1]}.png')
         plt.show()
