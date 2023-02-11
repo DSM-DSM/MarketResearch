@@ -10,6 +10,7 @@ mpl.rcParams['font.sans-serif'] = ['simhei']
 mpl.rcParams['axes.unicode_minus'] = False
 
 
+
 def plot_kj(kj):
     """
     绘制KJ关系轨迹
@@ -20,7 +21,7 @@ def plot_kj(kj):
     plt.ylabel('J')
     plt.title(u'K-J关系轨迹')
     # plt.xlim([1, len(kj)])
-
+    plt.savefig('../../pic/kmodes/K-J.png')
     plt.show()
 
 

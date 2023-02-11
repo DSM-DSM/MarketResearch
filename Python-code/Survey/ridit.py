@@ -212,4 +212,5 @@ class Ridit():
         plt.xlabel(str(self.question_list[0]) + ':' + string1 + '\n' +
                    str(self.question_list[1]) + ':' + string2)
         plt.ylabel('平均Ridit值')
+        plt.savefig(f'../../pic/ridit_boxplot/{self.question_list[0]}-{self.question_list[1]}.png')
         plt.show()
