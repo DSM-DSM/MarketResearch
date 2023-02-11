@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 import pandas as pd
 import kmeans_utils
-from decode import decoding_centroids
+from decode import Decode
 
 # 防止plt汉字乱码
 mpl.rcParams['font.sans-serif'] = ['simhei']
@@ -70,8 +70,9 @@ def main():
     data[f'class'] = r
     data.to_excel('../kmodes_result.xlsx', index=True)
     print('输出聚类中心具体含义:')
+    decode = Decode()
     for i in range(centroids[-1].shape[0]):
-        decoding_centroids(question, centroids[-1][i, :])
+        decode.decoding_centroids(question, centroids[-1][i, :])
 
 
 if __name__ == "__main__":
