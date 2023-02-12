@@ -65,12 +65,12 @@ def color(value):
 
 
 class Ridit():
-    def __init__(self, data, question_list):
-        self.data = data
+    def __init__(self, data_path, question_list):
+        self.data = pd.read_excel(data_path)
         self.question_list = question_list
         self.alpha = 0.05
         self.refer = None
-        self.decode = Decode()
+        self.decode = Decode(data_path)
         self.map_dict = self.decode.map_dict
         self.crosstab = None
         self.init_crosstab()
@@ -165,7 +165,7 @@ class Ridit():
         print('是否将合并组作为参照组:' + str(self.use_combine_as_refer))
         print('检验的问题:' + str(self.question_list))
         self.decode.decoding_question(self.question_list)
-        if not (self.crosstab['All'] > 50).all():
+        if not (self.crosstab['All'][:self.row] >= 43).all():
             warnings.warn('错误，Ridit检验要求每一组的样本个数至少为50。')
         if self.row == 2:
             dev = np.abs(self.crosstab['Ridit'][1] - self.crosstab['Ridit'][2])

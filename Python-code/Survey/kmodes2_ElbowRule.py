@@ -31,7 +31,8 @@ def main():
     print('\n即将运行K-Means聚类算法。\n\n')
 
     # 随机生成样本集
-    data = pd.read_excel('../data_Q26-30.xlsx')
+    data_path = '../data_kmodes.xlsx'
+    data = pd.read_excel(data_path)
     data.set_index('答题序号', inplace=True)
     x = data.values
 
@@ -68,7 +69,6 @@ def main():
 
     # 绘制KJ历史轨迹
     plot_kj(kj)
-
     print('\nK-Means运行完毕。\n\n')
 
 

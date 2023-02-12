@@ -35,7 +35,9 @@ def main():
     question = ['Q26', 'Q27', 'Q28', 'Q29', 'Q30']
     # 随机生成样本集
     # np.random.seed(12783)
-    data = pd.read_excel('../data_Q26-30.xlsx')
+    data_path = '../data_kmodes.xlsx'
+    data = pd.read_excel(data_path)
+    decode = Decode(data_path)
     data.set_index('答题序号', inplace=True)
     x = data.values
     # 运行K-Means算法所需参数。可尝试更改这些参数并观察其影响
@@ -71,7 +73,6 @@ def main():
     data[f'class'] = r
     data.to_excel('../kmodes_result.xlsx', index=True)
     print('输出聚类中心具体含义:')
-    decode = Decode()
     for i in range(centroids[-1].shape[0]):
         decode.decoding_centroids(question, centroids[-1][i, :])
 

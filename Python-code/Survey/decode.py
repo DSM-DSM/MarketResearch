@@ -8,7 +8,7 @@ import pandas as pd
 import numpy as np
 
 
-def get_map_dict():
+def get_map_dict(data_path):
     """
     特别说明question_order各取值的含义：
     1.态度类问题：利于主题的为优，反之亦然；
@@ -16,7 +16,7 @@ def get_map_dict():
     3.测谎类问题及其他：仅取值为“无”；
     :return:
     """
-    map = pd.read_excel('../../data/data.xlsx', sheet_name='文本编码对照表')
+    map = pd.read_excel(data_path, sheet_name='文本编码对照表')
     r, c = map.shape[0], map.shape[1]
     idx = map[0].isnull()
     idx = idx[idx == False].index.to_list()
@@ -39,8 +39,9 @@ def get_map_dict():
 
 
 class Decode():
-    def __init__(self):
-        self.map_dict = get_map_dict()
+    def __init__(self, data_path):
+        self.data_path = data_path
+        self.map_dict = get_map_dict(data_path)
 
     def decoding_centroids(self, question, coder):
         coder = coder.astype(int)
@@ -74,4 +75,3 @@ class Decode():
             print('检验问题等级排序为：先优后劣，平均Ridit值越小越好。')
         else:
             print('检验问题等级排序为：先劣后优，平均Ridit值越大越好。')
-
