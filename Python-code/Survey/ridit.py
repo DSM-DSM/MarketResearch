@@ -186,7 +186,7 @@ class Ridit():
                 print('有显著差异！')
                 self.decode.decoding_chi2_sig(self.question_list)
         self.boxplot()
-        print(self.crosstab)
+        print(self.crosstab['All'])
 
     def boxplot(self):
         print('开始绘制箱线图......')
@@ -213,4 +213,4 @@ class Ridit():
                    str(self.question_list[1]) + ':' + string2)
         plt.ylabel('平均Ridit值')
         plt.savefig(f'../../pic/ridit_boxplot/{self.question_list[0]}-{self.question_list[1]}.png')
-        plt.show()
+        # plt.show()

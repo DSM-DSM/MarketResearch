@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-            
+# -*- coding: utf-8 -*-
 # @Time : 2023/2/11 14:47
 # @Author : JinYueYu
 # Description : 
@@ -12,7 +12,7 @@ def main():
     # 第一个问题必须为检验的指标，第二个问题必须为等级指标
     list_1 = ['Q26', 'Q27', 'Q28', 'Q29', 'Q30']
     for i in range(len(list_1)):
-        question_list = [list_1[i], 'Q8']
+        question_list = [list_1[i], 'Q16']
         ridit = Ridit(data, question_list)
         ridit.calculate_stander_ri()
         ridit.calculate_std()
