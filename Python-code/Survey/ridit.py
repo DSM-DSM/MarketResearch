@@ -95,13 +95,14 @@ class Ridit():
                 values_list.append(string + '|' + str(i + 1))
             colnames = list(range(len(dictionary) - 3))
             colnames = [i + 1 for i in colnames]
+            # margins参数在Q15时失灵??
             self.crosstab = pd.pivot_table(self.data, index=self.question_list[0],
                                            values=values_list,
-                                           aggfunc=np.sum,
-                                           margins=True)
+                                           aggfunc=np.sum)
             self.crosstab.columns = colnames
             self.crosstab.columns.name = string
             self.crosstab['All'] = np.sum(self.crosstab, axis=1)
+            self.crosstab.loc['All'] = np.sum(self.crosstab, axis=0)
         else:
             raise '错误，Ridit检验出现单选多选以外的等级指标。'
 
@@ -186,7 +187,7 @@ class Ridit():
                 print('有显著差异！')
                 self.decode.decoding_chi2_sig(self.question_list)
         self.boxplot()
-        print(self.crosstab['All'])
+        print(self.crosstab)
 
     def boxplot(self):
         print('开始绘制箱线图......')
