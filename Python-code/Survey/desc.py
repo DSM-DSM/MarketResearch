@@ -35,16 +35,19 @@ def plot_RAdio(data, labels):
 data_path = '../data_ridit.xlsx'
 data = pd.read_excel(data_path)
 map = get_map_dict(data_path)
-save_to = '../desc.xlsx'
-with pd.ExcelWriter(save_to) as xlsx:
-    for i in range(len(map)):
-        ques = 'Q' + str(i + 1)
-        if '矩阵' in map[ques]['question_type']:
-            dict = map[ques]
-            value_list = [f'{ques}|R{j + 1}' for j in range(len(dict) - 3)]
-            meaning_list = [dict[f'R{k + 1}'] for k in range(len(dict) - 3)]
-            desc = data[value_list].describe()
-            desc.columns = meaning_list
-            desc.loc['mean_rank', :] = desc.loc['mean', :].rank(method='min', ascending=False)
-            # plot_RAdio(desc.loc['mean', :], meaning_list)
-            desc.to_excel(xlsx, sheet_name=ques)
+save_to_1 = '../desc.xlsx'
+save_to_2 = '../../市场调查/factor_analysis.xlsx'
+with pd.ExcelWriter(save_to_1) as xlsx_1:
+    with pd.ExcelWriter(save_to_2) as xlsx_2:
+        for i in range(len(map)):
+            ques = 'Q' + str(i + 1)
+            if '矩阵' in map[ques]['question_type']:
+                dict = map[ques]
+                value_list = [f'{ques}|R{j + 1}' for j in range(len(dict) - 3)]
+                meaning_list = [dict[f'R{k + 1}'] for k in range(len(dict) - 3)]
+                data[value_list].to_excel(xlsx_2, sheet_name=ques, index=False)
+                desc = data[value_list].describe()
+                desc.columns = meaning_list
+                desc.loc['mean_rank', :] = desc.loc['mean', :].rank(method='min', ascending=False)
+                # plot_RAdio(desc.loc['mean', :], meaning_list)
+                desc.to_excel(xlsx_1, sheet_name=ques)

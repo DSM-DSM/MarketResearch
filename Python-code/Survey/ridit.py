@@ -186,10 +186,10 @@ class Ridit():
             if chi_square > ub:
                 print('有显著差异！')
                 self.decode.decoding_chi2_sig(self.question_list)
-        self.boxplot()
+        self.ridit_boxplot()
         print(self.crosstab)
 
-    def boxplot(self):
+    def ridit_boxplot(self):
         print('开始绘制箱线图......')
         plt.figure(figsize=(6, 8))
         c_list = list(map(lambda x: color(tuple(x)), ncolors(self.row)))
@@ -214,4 +214,36 @@ class Ridit():
                    str(self.question_list[1]) + ':' + string2)
         plt.ylabel('平均Ridit值')
         plt.savefig(f'../../pic/ridit_boxplot/{self.question_list[0]}-{self.question_list[1]}.png')
+        # plt.show()
+
+    def k_wboxplot(self):
+        warnings.filterwarnings('ignore')
+        self.data['rank'] = self.data[self.question_list[1]].rank(method='average', ascending=True)
+        x_tick_loc, x_tick_name, rank_list, frequency = list(), list(), list(), list()
+        for i in range(self.row):
+            x_tick_name.append(self.map_dict[self.question_list[0]][str(i + 1)])
+
+            rank = round(np.mean(self.data[self.data[self.question_list[0]] == i + 1]['rank']), 2)
+            slis = self.data[self.data[self.question_list[0]] == i + 1][self.question_list[1]] == 1
+            freq = np.sum(slis) / len(slis)
+            rank_list.append(rank)
+            frequency.append(freq)
+        color1 = ["#" + ''.join([random.choice('0123456789ABCDEF') for j in range(6)])]
+        fig = plt.figure(figsize=(12, 6))
+        ax1 = fig.add_subplot(1, 2, 1)
+        ax2 = fig.add_subplot(1, 2, 2)
+        ax1.bar(x_tick_name, rank_list, edgecolor='k', color=color1)
+        for i in range(len(x_tick_name)):
+            ax1.text(x=i - 0.05 * self.row, y=rank_list[i] + 0.01 * max(rank_list), s=rank_list[i])
+        ax1.set_xticklabels(x_tick_name, rotation=25)
+        ax1.set_ylabel('秩和的均值')
+
+        color2 = ["#" + ''.join([random.choice('0123456789ABCDEF') for j in range(6)])]
+        ax2.bar(x_tick_name, frequency, edgecolor='k', color=color2)
+        for j in range(len(x_tick_name)):
+            ax2.text(x=j - 0.05 * self.row, y=frequency[j] + 0.01 * max(frequency),
+                     s=str(frequency[j] * 100)[:4] + '%')
+        ax2.set_ylabel('去过一人食餐厅的频率')
+        ax2.set_xticklabels(x_tick_name, rotation=25)
+        plt.savefig(f'../../pic/K-Wboxplot/{self.question_list[0]}-{self.question_list[1]}.png')
         # plt.show()

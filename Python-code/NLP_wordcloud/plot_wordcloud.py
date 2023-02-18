@@ -12,7 +12,7 @@ from wordcloud import WordCloud
 from PIL import Image  #
 import matplotlib.pyplot as plt
 
-df = pd.read_excel('../data/NLP处理后.xlsx')
+df = pd.read_excel('../data/孤独的美食家/NLP处理后.xlsx')
 df_positive = df[df['if_positive'] == 1]
 seg_list = jieba.cut(str(df_positive['short']), cut_all=False)
 
