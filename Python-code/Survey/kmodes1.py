@@ -12,6 +12,7 @@ mpl.rcParams['axes.unicode_minus'] = False
 plt.rcParams['savefig.dpi'] = 200
 plt.rcParams['figure.dpi'] = 200
 
+
 def plot_jhistory(j_history):
     """
     绘制代价J的下降曲线
@@ -37,6 +38,7 @@ def main():
     # np.random.seed(12783)
     data_path = '../data_kmodes.xlsx'
     data = pd.read_excel(data_path)
+    data = data[data['Q16'] == 1][['答题序号', 'Q26', 'Q27', 'Q28', 'Q29', 'Q30']]
     decode = Decode(data_path)
     data.set_index('答题序号', inplace=True)
     x = data.values
