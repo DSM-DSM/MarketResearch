@@ -12,6 +12,7 @@ plt.rcParams['savefig.dpi'] = 200
 plt.rcParams['figure.dpi'] = 200
 
 
+
 def plot_kj(kj):
     """
     绘制KJ关系轨迹
