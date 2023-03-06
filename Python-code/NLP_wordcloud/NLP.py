@@ -42,15 +42,15 @@ k = 20
 n, bins, patches = plt.hist(scores, bins=20, range=(0, 1), edgecolor='white', density=True, cumulative=True)
 ruler = 1 / k
 # 色卡:https://blog.csdn.net/Lee_Yu_Rui/article/details/107995652
-cm = plt.cm.get_cmap('brg')
+cm = plt.cm.get_cmap('rainbow')
 for i in range(len(n)):
     plt.text(i * ruler, n[i] * 1.01, str(round(n[i] * 100, 2))[:3] + '%', fontsize=10)
 for c, p in zip(n, patches):
     if c < 1:
-        plt.setp(p, 'facecolor', cm(c))
+        plt.setp(p, 'facecolor', cm(1-c))
     else:
         # 'red'<-->根据色卡改变
-        plt.setp(p, 'facecolor', 'red')
+        plt.setp(p, 'facecolor', '#70FACD')
 plt.xlabel('情感评分')
 plt.ylabel('累计频率')
 plt.savefig('../../pic/nlp_cumulative.png')
